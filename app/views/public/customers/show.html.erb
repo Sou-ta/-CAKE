@@ -1,0 +1,51 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+ <div class="row">
+   <div class="bg-light px-4 mx-4 mb-3 ">
+    <h3>マイページ</h3>
+   </div>
+ </div>
+<div class="row">
+  <div class="col-9">
+    <div class="font-weight-bold lead col-6 my-3">
+    登録情報 <%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success px-3 mx-4" %>
+    </div>
+    <table class="table table-bordered" >
+
+        <tr>
+          <th class="table-active border-dark col-4">氏名</th>
+          <td class="border-dark"><%= current_customer.last_name+current_customer.first_name %></td>
+        </tr>
+        <tr>
+          <th class="table-active border-dark">カナ</th>
+          <td class="border-dark"><%= current_customer.last_name_kana+current_customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th class="table-active border-dark">郵便番号</th>
+          <td class="border-dark"><%= current_customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th class="table-active border-dark">住所</th>
+          <td class="border-dark"><%= current_customer.address %></td>
+        </tr>
+        <tr>
+          <th class="table-active border-dark">電話番号</th>
+          <td class="border-dark"><%= current_customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th class="table-active border-dark">メールアドレス</th>
+          <td class="border-dark"><%= current_customer.email %></td>
+        </tr>
+    </table>
+    <div class="font-weight-bold lead col-6 mt-4 mb-3">
+      <table>
+        <tr>
+         <td>配送先</td>
+         <td><%= link_to "一覧を見る", addresses_path(current_customer), class: "btn btn-primary px-3 my-3 mx-4" %></td>
+        </tr>
+        <tr>
+         <td>注文履歴</td>
+         <td><%= link_to "一覧を見る", orders_path(current_customer), class: "btn btn-primary px-3 mx-4" %></td>
+        </tr>
+      </table>
+    </div>

@@ -1,0 +1,50 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+ <div class="row">
+  <div class="bg-light px-4 mx-4 ">
+  <h3>商品詳細</h3>
+  </div>
+ </div>
+ <div class="row">
+   <div class="col-md-4 pt-3 m-auto">
+    <% if @item.image.attached? %>
+    <%= image_tag @item.image, size: "240x240", class:" img-thumbnail" %>
+    <% end %>
+  </div>
+   <div class="my-3 mx-auto p-5 col-md-8">
+    <table class="table table-borderless">
+     <tr>
+      <th>商品名</th>
+      <td><%= @item.name %></td>
+     </tr>
+     <tr>
+      <th>商品説明</th>
+      <td><%= @item.introduction %></td>
+     </tr>
+      <tr>
+      <th>ジャンル</th>
+      <td><%= @item.genre.name %></td>
+     </tr>
+      <tr>
+      <th>税込価格</br>(税抜価格)</th>
+      <td><%= @item.full_price.to_s(:price) %>(<%= @item.price.to_s(:price) %>)円</td>
+     </tr>
+      <tr>
+      <th>販売ステータス</th>
+      <th>
+    	 　 <% if @item.is_active? == true %>
+					  <a class="text-success">販売中</a>
+				  <% else %>
+					  <a class="text-secondary">販売停止中</a>
+				  <% end %>
+			</th>
+      </tr>
+    </table>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col text-center">
+     <%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success px-3 mx-auto' %>
+   </div>
+   </div>
+</div>

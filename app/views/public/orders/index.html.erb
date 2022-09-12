@@ -1,0 +1,37 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+ <div class="row">
+  <div class="bg-light px-4 mx-4 ">
+  <h3>注文履歴一覧</h3>
+  </div>
+ </div>
+ <div class="row">
+   <div class="col mt-3">
+     <table class="table table-bordered">
+       <thead>
+         <th class="table-active border-dark">注文日</th>
+         <th class="table-active border-dark">配送先</th>
+         <th class="table-active border-dark">注文商品</th>
+         <th class="table-active border-dark">支払金額</th>
+         <th class="table-active border-dark">ステータス</th>
+         <th class="table-active border-dark">注文詳細</th>
+       </thead>
+       <% @orders.each do |order| %>
+       <tbody>
+         <td class="border-dark"><%= order.created_at.strftime("%Y/%m/%d") %></td>
+         <td class="border-dark"><%= order.postal_code %></br>
+                                 <%= order.address %></br>
+                                 <%= order.name %></td>
+         <td class="border-dark"><% order.order_details.each do |order_detail| %>
+                                  <%= order_detail.item.name %><br />
+                                 <% end %></td>
+         <td class="border-dark"><%= (order.postage + order.total_payment).to_s(:delimited, delimiter: ',') %></td>
+         <td class="border-dark"><%= order.status %></td>
+         <td class="border-dark text-center col-xs-4"><%= link_to "注文詳細", order_path(order), class:'btn btn-primary btn-sm m-auto' %></td>
+       </tbody>
+       <% end %>
+     </table>
+   </div>
+
+ </div>
+   <div class="text-center"><%= paginate @orders %></div>

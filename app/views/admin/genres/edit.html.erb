@@ -1,0 +1,18 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+<div class="row">
+  <div class="bg-light px-4 mx-4 ">
+  <h3>ジャンル編集</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="my-5">
+   <%= form_with model: @genre, url: admin_genre_path(@genre), local:true do |f| %>
+    <tr>ジャンル名</tr>
+    <%= f.text_field :name, class: 'mx-5' %>
+    <%= f.submit '変更を保存', class: 'btn btn-success mx-5 px-4' %>
+    <%= link_to '戻る', admin_genres_path, class: 'btn btn-outline-success mx-3 px-4' %>
+   <% end %>
+  </div>
+</div>
+</div>

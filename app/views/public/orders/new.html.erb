@@ -1,0 +1,48 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+ <div class="row">
+   <div class="bg-light px-4 mx-4 mb-3 ">
+    <h3>注文情報入力</h3>
+   </div>
+ </div>
+ <div class="row">
+  <div class="col-11">
+    <%= form_with model: @order, url: orders_comp_path, method: :post, local: true do |f| %>
+    <div class="font-weight-bold lead col-6 my-3">
+      支払い方法
+    </div>
+        <%#= f.collection_radio_buttons :payment_method, Order.payment_methods, :first, :last %>
+    <h5><%= f.radio_button :payment_method, :クレジットカード, checked: true, class:'ml-5' %><%= f.label :クレジットカード %></h5>
+    <h5><%= f.radio_button :payment_method, :銀行振込, class:'ml-5' %><%= f.label :銀行振込 %></h5>
+    <div class="font-weight-bold lead col-6 my-3">
+      お届け先
+    </div>
+    <h5><%= f.radio_button :a_method, 0, checked: true, class:'ml-5' %><%= f.label :ご自身の住所 %></h5>
+        <div class="ml-5">〒<%= @customer.postal_code %><span> </span>
+          <%= @customer.address %><span> </span></br>
+          <%= @customer.last_name %><%= @customer.first_name %>
+        </div>
+    <h5 class="my-3"><%= f.radio_button :a_method, 1, class:'ml-5' %><%= f.label :登録済住所から選択 %></h5>
+        <div class="ml-5">
+          <%= f.collection_select :address, Address.all, :id, :address, class: "form-control" %>
+        </div>
+     <h5 class="mt-3"><%= f.radio_button :a_method, 2, class:'ml-5' %><%= f.label :新しいお届け先 %></h5>
+          <div class="col-8 ml-5">
+          <table class="table table-borderless">
+          <tr><th><%= f.label :"郵便番号(ハイフンなし)" ,class: "control-label mt-3" %></th>
+          <td><%= f.text_field :postal_code, class: "col-8  form-control mt-3" %></td></tr>
+          <tr><th><%= f.label :"住所" ,class: "control-label mt-3" %></th>
+          <td><%= f.text_field :address, class: "form-control mt-3 address" %></td></tr>
+          <tr><th><%= f.label :"宛名" ,class: "control-label mt-3" %></th>
+          <td><%= f.text_field :name, class: "col-8 form-control mt-3 name" %></td></tr>
+          </table>
+          </div>
+
+
+  </div>
+    <div class="col-12 mt-3 text-center">
+        <%= f.submit "確認画面へ進む", class:'btn btn-md btn-primary' %>
+    </div>
+  <% end %>
+ </div>
+</div>

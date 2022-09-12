@@ -1,0 +1,62 @@
+<p class="notice"><%= flash[:notice] %></p>
+<div class="container px-5 px-sm-0 ">
+ <div class="row">
+  <div class="bg-light px-4 mx-4 ">
+  <h3><%= @customer.last_name+@customer.first_name %>さんの会員情報編集</h3>
+  </div>
+ </div>
+ <div class="row">
+   <div class="col-19 mt-3">
+    <table class="">
+  <%= form_with model: @customer, url: admin_customer_path, local:true do |f| %>
+
+  <tr>
+    <th>会員ID</th>
+    <td class="text-center mr-5"><%= @customer.id %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :名前 %></th>
+  <td><%= f.text_field :last_name,autoforcus: true, autocomplete: "last_name",  placeholder: "(姓)" , class: "form-control mt-3 mx-5" %></td>
+  <td><%= f.text_field :first_name,autoforcus: true, autocomplete: "first_name",  placeholder: "(名)", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :フリガナ %></th>
+  <td><%= f.text_field :last_name_kana,autoforcus: true, autocomplete: "last_name_kana",  placeholder: "(セイ)" , class: "form-control mt-3 mx-5" %></td>
+  <td><%= f.text_field :first_name_kana,autoforcus: true, autocomplete: "first_name_kana",  placeholder: "(メイ)", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :郵便番号 %></th>
+  <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder:"1234567", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :住所 %></th>
+  <td><%= f.text_field :address, autofocus: true, autocomplete: "address", placeholder:"東京都新宿三丁目", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :電話番号 %></th>
+  <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", placeholder:"1234567890", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+  <th><%= f.label :メールアドレス %></th>
+  <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@dfssd.com", class: "form-control mt-3 mx-5" %></td>
+  </tr>
+
+  <tr>
+    <th>会員ステータス</th>
+    <td><%= f.radio_button :is_deleted, false ,class:'ml-5' %><%= f.label :有効 %>
+        <%= f.radio_button :is_deleted, true ,class:'ml-3'%><%= f.label :退会 %>
+    </td>
+  </tr>
+
+    <th></th>
+   <td><%= f.submit "変更を保存", class:'btn btn-success px-4 mt-3 mx-5' %></td>
+  <% end %>
+     </table>
+   </div>
+ </div>
